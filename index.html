@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Ticket Reservation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="bus-icon" aria-hidden="true">🚌</div>
+    <h1>Book your bus seat</h1>
+    <p>Choose your route, pick seats, get your ticket.</p>
+  </header>
+
+  <main id="booking-view" class="layout">
+    <!-- Step 1: trip details -->
+    <section class="card">
+      <h2><span class="step">1</span>Trip details</h2>
+      <form id="trip-form" novalidate>
+        <div class="field">
+          <label for="from">From</label>
+          <select id="from"></select>
+        </div>
+        <div class="field">
+          <label for="to">To</label>
+          <select id="to"></select>
+        </div>
+        <div class="field">
+          <label for="date">Travel date</label>
+          <input type="date" id="date">
+        </div>
+        <div class="field">
+          <label for="name">Passenger name</label>
+          <input type="text" id="name" placeholder="Full name">
+        </div>
+        <div class="field">
+          <label for="phone">Mobile number</label>
+          <input type="tel" id="phone" placeholder="10-digit number" maxlength="10">
+        </div>
+        <p id="error" class="error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <!-- Step 2: seats -->
+    <section class="card seats">
+      <h2><span class="step">2</span>Select seats <span class="hint">(up to 4)</span></h2>
+      <ul class="legend">
+        <li><span class="dot free"></span>Aisle side</li>
+        <li><span class="dot window"></span>Window</li>
+        <li><span class="dot selected"></span>Selected</li>
+        <li><span class="dot booked"></span>Booked</li>
+      </ul>
+      <div class="bus">
+        <div class="driver">Driver</div>
+        <div id="seat-map" class="seat-map"></div>
+      </div>
+    </section>
+
+    <!-- Step 3: summary -->
+    <aside class="card summary">
+      <h2><span class="step">3</span>Summary</h2>
+      <dl>
+        <dt>Route</dt><dd id="sum-route">-</dd>
+        <dt>Date</dt><dd id="sum-date">-</dd>
+        <dt>Seats</dt><dd id="sum-seats">None selected</dd>
+        <dt>Fare per seat</dt><dd id="sum-fare">-</dd>
+      </dl>
+      <p class="total">Total <strong id="sum-total">₹0</strong></p>
+      <button id="confirm-btn" class="primary">Confirm booking</button>
+    </aside>
+  </main>
+
+  <!-- Ticket view -->
+  <main id="ticket-view" class="ticket-wrap" hidden>
+    <p class="success">🎉 Booking confirmed! Have a happy journey.</p>
+    <article class="ticket" id="ticket">
+      <div class="ticket-main">
+        <p class="ticket-label">Booking ID</p>
+        <p class="ticket-id" id="t-id"></p>
+        <div class="route-line">
+          <span id="t-from"></span>
+          <span class="arrow">to</span>
+          <span id="t-to"></span>
+        </div>
+        <div class="ticket-grid">
+          <div><p class="ticket-label">Passenger</p><p id="t-name"></p></div>
+          <div><p class="ticket-label">Mobile</p><p id="t-phone"></p></div>
+          <div><p class="ticket-label">Date</p><p id="t-date"></p></div>
+          <div><p class="ticket-label">Seats</p><p id="t-seats"></p></div>
+        </div>
+      </div>
+      <div class="ticket-stub">
+        <p class="ticket-label">Amount paid</p>
+        <p class="stub-amount" id="t-total"></p>
+        <p class="ticket-label">Status</p>
+        <p class="stub-status">Confirmed</p>
+      </div>
+    </article>
+    <div class="actions">
+      <button id="print-btn" class="secondary">Print ticket</button>
+      <button id="new-btn" class="primary">Book another</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
